@@ -82,9 +82,9 @@ def move():
     directions = ['up', 'left', 'down', 'right']
         #direction = random.choice(directions)
     global variable
-    print(variable)
     if variable == 4:
         variable = 0
+    print(variable)
     direction = directions[variable]
     variable = variable + 1
     #direction = directions[1]
