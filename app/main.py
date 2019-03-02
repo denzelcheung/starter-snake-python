@@ -65,8 +65,8 @@ def getBoardInfo(data):
     for body in data['you']['body']:
         board[body['y']][body['x']] = 20
 
-    board[data['you']['body'][0]['y']][data['you']['body'][0]['x']] = 10
-    board[data['you']['body'][-1]['y']][data['you']['body'][-1]['x']] = 30
+    board[data['you']['body'][0]['y']][data['you']['body'][0]['x']] = 10        #Head
+    board[data['you']['body'][-1]['y']][data['you']['body'][-1]['x']] = 30      #Body
     return board
 
 @bottle.post('/move')
@@ -81,14 +81,24 @@ def move():
 
     directions = ['up', 'left', 'down', 'right']
         #direction = random.choice(directions)
-    global variable
-    if variable == 4:
-        variable = 0
-    print(variable)
-    direction = directions[variable]
-    variable = variable + 1
-    #direction = directions[1]
-    return move_response(direction)
+
+    board = getBoardInfo(data)
+    head_x = 0
+    head_y = 0
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if board[i][j] == 10:
+                head_x = i
+                head_y = j
+    if (board[head_x+1][head_y] == 0):
+        return move_response(directions[3])
+    elif (board[head_x-1][head_y] == 0):
+        return move_response(directions[1])
+    elif (board[head_x][head_y+1] == 0):
+        return move_response(directions[0])
+    elif (board[head_x][head_y-1] == 0):
+        return move_response(directions[2])
+
 
 
 @bottle.post('/end')
