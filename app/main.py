@@ -69,6 +69,14 @@ def getBoardInfo(data):
     board[data['you']['body'][-1]['y']][data['you']['body'][-1]['x']] = 30      #Body
     return board
 
+def getSnakeInfo(data):
+    snake = {}
+    snake['health'] = data['you']['health']
+    snake['length'] = len(data['you']['body'])
+    snake['head'] = data['you']['body'][0]
+    snake['tail'] = data['you']['body'][-1]
+    return snake
+
 @bottle.post('/move')
 def move():
     data = bottle.request.json
@@ -83,14 +91,9 @@ def move():
         #direction = random.choice(directions)
 
     board = getBoardInfo(data)
-    head_x = 0
-    head_y = 0
-    for i in range(len(board)):
-        for j in range(len(board[i])):
-            if board[i][j] == 10:
-                head_x = i
-                head_y = j
-                break
+    snake = getSnakeInfo(data)
+    head_x = snake['head']['x']
+    head_y = snake['head']['y']
     if board[head_x+1][head_y] == 0 or 5:
         return move_response(directions[3])
     elif board[head_x-1][head_y] == 0 or 5:
