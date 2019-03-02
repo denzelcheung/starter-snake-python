@@ -47,6 +47,28 @@ def start():
     return start_response(color)
 
 
+#def getBoardInfo(data):
+#    boardInfo = data
+#    board = [0] * boardInfo['board']['width']
+#    for i in range(boardInfo['board']['width']):
+#        board[i] = [0] * boardInfo['board']['height']
+
+#    for food in boardInfo['board']['food']:
+#        board[food['y']][food['x']] = 5
+
+#    for snake in boardInfo['board']['snakes']:
+#        for body in snake['body']:
+#            board[body['y']][body['x']] = 2
+#        board[snake['body'][0]['y']][snake['body'][0]['x']] = 1
+#        board[snake['body'][-1]['y']][snake['body'][-1]['x']] = 3
+
+#    for body in data['you']['body']:
+#        board[body['y']][body['x']] = 20
+
+#    board[data['you']['body'][0]['y']][data['you']['body'][0]['x']] = 10        #Head
+#    board[data['you']['body'][-1]['y']][data['you']['body'][-1]['x']] = 30      #Body
+#    return board
+
 def getBoardInfo(data):
     boardInfo = data
     board = [0] * boardInfo['board']['width']
@@ -54,19 +76,19 @@ def getBoardInfo(data):
         board[i] = [0] * boardInfo['board']['height']
 
     for food in boardInfo['board']['food']:
-        board[food['y']][food['x']] = 5
+        board[food['x']][food['y']] = 5
 
     for snake in boardInfo['board']['snakes']:
         for body in snake['body']:
-            board[body['y']][body['x']] = 2
-        board[snake['body'][0]['y']][snake['body'][0]['x']] = 1
-        board[snake['body'][-1]['y']][snake['body'][-1]['x']] = 3
+            board[body['x']][body['y']] = 2
+        board[snake['body'][0]['x']][snake['body'][0]['y']] = 1
+        board[snake['body'][-1]['x']][snake['body'][-1]['y']] = 3
 
     for body in data['you']['body']:
-        board[body['y']][body['x']] = 20
+        board[body['x']][body['y']] = 20
 
-    board[data['you']['body'][0]['y']][data['you']['body'][0]['x']] = 10        #Head
-    board[data['you']['body'][-1]['y']][data['you']['body'][-1]['x']] = 30      #Body
+    board[data['you']['body'][0]['x']][data['you']['body'][0]['y']] = 10        #Head
+    board[data['you']['body'][-1]['x']][data['you']['body'][-1]['y']] = 30      #Body
     return board
 
 def getSnakeInfo(data):
