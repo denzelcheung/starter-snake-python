@@ -94,13 +94,13 @@ def move():
     snake = getSnakeInfo(data)
     head_x = snake['head']['x']
     head_y = snake['head']['y']
-    if (board[head_x+1][head_y] == 0 or 5) and (head_x+1) < 11:
+    if (board[head_x+1][head_y] == 0) and (head_x+1) < 11:
         return move_response(directions[3])
-    elif (board[head_x-1][head_y] == 0 or 5) and (head_x-1) > 0:
+    elif (board[head_x-1][head_y] == 0) and (head_x-1) > 0:
         return move_response(directions[1])
-    elif (board[head_x][head_y+1] == 0 or 5) and (head_y+1) < data['board']['height']:
+    elif (board[head_x][head_y+1] == 0) and (head_y+1) < data['board']['height']:
         return move_response(directions[2])
-    elif (board[head_x][head_y-1] == 0 or 5) and (head_y-1) > 0:
+    elif (board[head_x][head_y-1] == 0) and (head_y-1) > 0:
         return move_response(directions[0])
 
 
