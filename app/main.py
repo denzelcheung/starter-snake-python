@@ -51,24 +51,10 @@ def start():
 
     return start_response(color)
 
-
-def getBoardInfo(data):
-    boardInfo = data
-    board = [boardInfo['board']['height']][boardInfo['board']['width']]
-    for food in boardInfo['board']['food']:
-        board[food['y']][food['x']] = 10    #food
-
-    for snake in boardInfo['board']['snakes']:
-        for body in snake['body']:
-            board[body['y']][body['x']] = 2
-        board[snake['body'][1]['y']][snake['body'][1]['x']] = 1     #head
-        board[snake['body'][-1]['y']][snake['body'][-1]['x']] = 3   #tail
-    print(board)
-
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    getBoardInfo(data)
+    #direction = scanBoard()
     """
     TODO: Using the data from the endpoint request object, your
             snake AI must choose a direction to move in.
