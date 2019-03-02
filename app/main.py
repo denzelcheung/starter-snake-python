@@ -2,6 +2,7 @@ import json
 import os
 import random
 import bottle
+import numpy as np
 
 from api import ping_response, start_response, move_response, end_response
 
@@ -52,19 +53,24 @@ def start():
     return start_response(color)
 
 
+def getBoardInfo(data):
+    boardInfo = data
+    board = np.zeros((boardInfo['board']['height'], boardInfo['board']['width']))
+
+    for food in boardInfo['board']['food']:
+        board[food['y']][food['x']] = 10
+
+    for snake in boardInfo['board']['snakes']:
+        for body in snake['body']:
+            board[body['y']][body['x']] = 2
+        board[snake['body'][1]['y']][snake['body'][1]['x']] = 1
+        board[snake['body'][-1]['y']][snake['body'][-1]['x']] = 3
+    print(board)
+
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    food = data['food']
-    body = data['body']
-    snakes = data['snakes']
-    me = data['you']
-
-    print(food)
-    print(body)
-    print(snakes)
-    print(me)
-
+    getBoardInfo(data)
     """
     TODO: Using the data from the endpoint request object, your
             snake AI must choose a direction to move in.
@@ -72,11 +78,7 @@ def move():
     print(json.dumps(data))
 
     directions = ['up', 'down', 'left', 'right']
-    #direction = random.choice(directions)
-    if food:
-        direction = directions[0]
-    else:
-        direction = directions[1]
+    direction = random.choice(directions)
     return move_response(direction)
 
 
