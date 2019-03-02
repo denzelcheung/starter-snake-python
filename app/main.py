@@ -33,7 +33,13 @@ def ping():
 @bottle.post('/start')
 def start():
     data = bottle.request.json
+    game_id = data['game_id']
+    board_width = data['width']
+    board_height = data['height']
 
+    print(game_id)
+    print(board_height)
+    print(board_width)
     """
     TODO: If you intend to have a stateful snake AI,
             initialize your snake state here using the
