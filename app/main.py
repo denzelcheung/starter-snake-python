@@ -97,22 +97,13 @@ def move():
     width = data['board']['width']
     height = data['board']['height']
 
-    #if (board[head_x+1][head_y] == 0) and (head_x+1) < width:
-    #    return move_response(directions[3])
-    #elif (board[head_x-1][head_y] == 0) and (head_x-1) > 0:
-    #    return move_response(directions[1])
-    #elif (board[head_x][head_y+1] == 0) and (head_y+1) < height:
-    #    return move_response(directions[2])
-    #elif (board[head_x][head_y-1] == 0) and (head_y-1) > 0:
-    #    return move_response(directions[0])
-
-    if (head_x+1) < width:
+    if (board[head_x+1][head_y] == 0) and (head_x+1) < width:
         return move_response(directions[3])
-    elif (head_x-1) > 0:
+    elif (board[head_x-1][head_y] == 0) and (head_x-1) > 0:
         return move_response(directions[1])
-    elif (head_y+1) < height:
+    elif (board[head_x][head_y+1] == 0) and (head_y+1) < height:
         return move_response(directions[2])
-    elif (head_y-1) > 0:
+    elif (board[head_x][head_y-1] == 0) and (head_y-1) > 0:
         return move_response(directions[0])
 
 
