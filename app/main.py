@@ -84,8 +84,9 @@ def move():
     global variable
     if variable == 4:
         variable = 0
-        direction = directions[variable]
-        #direction = directions[1]
+    direction = directions[variable]
+    variable = variable + 1
+    #direction = directions[1]
     return move_response(direction)
 
 
