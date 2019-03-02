@@ -2,7 +2,6 @@ import json
 import os
 import random
 import bottle
-import numpy as np
 
 from api import ping_response, start_response, move_response, end_response
 
@@ -55,16 +54,15 @@ def start():
 
 def getBoardInfo(data):
     boardInfo = data
-    board = np.zeros((boardInfo['board']['height'], boardInfo['board']['width']))
-
+    board = [boardInfo['board']['height']][boardInfo['board']['width']]
     for food in boardInfo['board']['food']:
-        board[food['y']][food['x']] = 10
+        board[food['y']][food['x']] = 10    #food
 
     for snake in boardInfo['board']['snakes']:
         for body in snake['body']:
             board[body['y']][body['x']] = 2
-        board[snake['body'][1]['y']][snake['body'][1]['x']] = 1
-        board[snake['body'][-1]['y']][snake['body'][-1]['x']] = 3
+        board[snake['body'][1]['y']][snake['body'][1]['x']] = 1     #head
+        board[snake['body'][-1]['y']][snake['body'][-1]['x']] = 3   #tail
     print(board)
 
 @bottle.post('/move')
