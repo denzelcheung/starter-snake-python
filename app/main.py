@@ -90,13 +90,14 @@ def move():
             if board[i][j] == 10:
                 head_x = i
                 head_y = j
-    if (board[head_x+1][head_y] == 0):
+                break
+    if board[head_x+1][head_y] == 0 or 5:
         return move_response(directions[3])
-    elif (board[head_x-1][head_y] == 0):
+    elif board[head_x-1][head_y] == 0 or 5:
         return move_response(directions[1])
-    elif (board[head_x][head_y+1] == 0):
+    elif board[head_x][head_y+1] == 0 or 5:
         return move_response(directions[0])
-    elif (board[head_x][head_y-1] == 0):
+    elif board[head_x][head_y-1] == 0 or 5:
         return move_response(directions[2])
 
 
