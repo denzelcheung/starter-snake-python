@@ -58,8 +58,8 @@ def move():
 
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
-	#test
-
+	direction = directions[1]
+	
     return move_response(direction)
 
 
