@@ -37,9 +37,6 @@ def start():
     board_width = data['width']
     board_height = data['height']
 
-    print(game_id)
-    print(board_height)
-    print(board_width)
     """
     TODO: If you intend to have a stateful snake AI,
             initialize your snake state here using the
@@ -62,7 +59,8 @@ def move():
     print(json.dumps(data))
 
     directions = ['up', 'down', 'left', 'right']
-    direction = random.choice(directions)
+    #direction = random.choice(directions)
+    direction = directions[1]
     return move_response(direction)
 
 
