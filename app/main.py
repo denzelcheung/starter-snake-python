@@ -46,29 +46,6 @@ def start():
 
     return start_response(color)
 
-
-#def getBoardInfo(data):
-#    boardInfo = data
-#    board = [0] * boardInfo['board']['width']
-#    for i in range(boardInfo['board']['width']):
-#        board[i] = [0] * boardInfo['board']['height']
-
-#    for food in boardInfo['board']['food']:
-#        board[food['y']][food['x']] = 5
-
-#    for snake in boardInfo['board']['snakes']:
-#        for body in snake['body']:
-#            board[body['y']][body['x']] = 2
-#        board[snake['body'][0]['y']][snake['body'][0]['x']] = 1
-#        board[snake['body'][-1]['y']][snake['body'][-1]['x']] = 3
-
-#    for body in data['you']['body']:
-#        board[body['y']][body['x']] = 20
-
-#    board[data['you']['body'][0]['y']][data['you']['body'][0]['x']] = 10        #Head
-#    board[data['you']['body'][-1]['y']][data['you']['body'][-1]['x']] = 30      #Body
-#    return board
-
 def getBoardInfo(data):
     boardInfo = data
     board = [0] * boardInfo['board']['width']
@@ -119,9 +96,9 @@ def move():
     width = data['board']['width']
     height = data['board']['height']
 
-    if (board[head_x+1][head_y] == 0 or board[head_x+1][head_y] == 5) and ((head_x+1) < width-1):
+    if (board[head_x+1][head_y] == 0 or board[head_x+1][head_y] == 5) and ((head_x+1) < width):
         return move_response(directions[3])
-    elif (board[head_x][head_y+1] == 0 or board[head_x][head_y+1] == 5) and ((head_y+1) < height-1):
+    elif (board[head_x][head_y+1] == 0 or board[head_x][head_y+1] == 5) and ((head_y+1) < height):
         return move_response(directions[2])
     elif (board[head_x-1][head_y] == 0 or board[head_x-1][head_y] == 5) and ((head_x-1) > 0):
         return move_response(directions[1])
