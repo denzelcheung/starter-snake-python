@@ -96,9 +96,9 @@ def move():
     width = data['board']['width']
     height = data['board']['height']
 
-    if (board[head_x+1][head_y] == 0 or board[head_x+1][head_y] == 5) and ((head_x+1) < width):
+    if (board[head_x+1][head_y] == 0 or board[head_x+1][head_y] == 5) and ((head_x+1) < width-1):
         return move_response(directions[3])
-    elif (board[head_x][head_y+1] == 0 or board[head_x][head_y+1] == 5) and ((head_y+1) < height):
+    elif (board[head_x][head_y+1] == 0 or board[head_x][head_y+1] == 5) and ((head_y+1) < height-1):
         return move_response(directions[2])
     elif (board[head_x-1][head_y] == 0 or board[head_x-1][head_y] == 5) and ((head_x-1) > 0):
         return move_response(directions[1])
