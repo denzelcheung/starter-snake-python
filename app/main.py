@@ -55,6 +55,15 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
+    food = data['food']
+    body = data['body']
+    snakes = data['snakes']
+    me = data['you']
+
+    print(food)
+    print(body)
+    print(snakes)
+    print(me)
 
     """
     TODO: Using the data from the endpoint request object, your
@@ -64,8 +73,10 @@ def move():
 
     directions = ['up', 'down', 'left', 'right']
     #direction = random.choice(directions)
-    direction = directions[1]
-	
+    if food:
+        direction = directions[0]
+    else:
+        direction = directions[1]
     return move_response(direction)
 
 
