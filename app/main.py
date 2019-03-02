@@ -99,10 +99,10 @@ def move():
 
     if (board[head_x+1][head_y] == 0) and (head_x+1) < width-1:
         return move_response(directions[3])
-    elif (board[head_x-1][head_y] == 0) and (head_x-1) > 0:
-        return move_response(directions[1])
     elif (board[head_x][head_y+1] == 0) and (head_y+1) < height:
         return move_response(directions[2])
+    elif (board[head_x-1][head_y] == 0) and (head_x-1) > 0:
+        return move_response(directions[1])
     elif (board[head_x][head_y-1] == 0) and (head_y-1) > 0:
         return move_response(directions[0])
 
