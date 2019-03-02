@@ -5,6 +5,8 @@ import bottle
 
 from api import ping_response, start_response, move_response, end_response
 
+variable = 0
+
 @bottle.route('/')
 def index():
     return '''
@@ -33,10 +35,6 @@ def ping():
 @bottle.post('/start')
 def start():
     data = bottle.request.json
-    game_id = data['game_id']
-    board_width = data['width']
-    board_height = data['height']
-
     """
     TODO: If you intend to have a stateful snake AI,
             initialize your snake state here using the
@@ -48,19 +46,46 @@ def start():
 
     return start_response(color)
 
+
+def getBoardInfo(data):
+    boardInfo = data
+    board = [0] * boardInfo['board']['width']
+    for i in range(boardInfo['board']['width']):
+        board[i] = [0] * boardInfo['board']['height']
+
+    for food in boardInfo['board']['food']:
+        board[food['y']][food['x']] = 5
+
+    for snake in boardInfo['board']['snakes']:
+        for body in snake['body']:
+            board[body['y']][body['x']] = 2
+        board[snake['body'][0]['y']][snake['body'][0]['x']] = 1
+        board[snake['body'][-1]['y']][snake['body'][-1]['x']] = 3
+
+    for body in data['you']['body']:
+        board[body['y']][body['x']] = 20
+
+    board[data['you']['body'][0]['y']][data['you']['body'][0]['x']] = 10
+    board[data['you']['body'][-1]['y']][data['you']['body'][-1]['x']] = 30
+    return board
+
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    #direction = scanBoard()
+
     """
     TODO: Using the data from the endpoint request object, your
             snake AI must choose a direction to move in.
     """
     print(json.dumps(data))
 
-    directions = ['up', 'down', 'left', 'right']
-    #direction = random.choice(directions)
-    direction = directions[1]
+    directions = ['up', 'left', 'down', 'right']
+        #direction = random.choice(directions)
+    global variable
+    if variable == 4:
+        variable = 0
+        direction = directions[variable]
+        #direction = directions[1]
     return move_response(direction)
 
 
